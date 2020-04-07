@@ -1,73 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Krista Werdelin</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <link
-        href="https://fonts.googleapis.com/css?family=Baskervville:400i|Montserrat|Open+Sans+Condensed:300&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://use.typekit.net/adt6mug.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-</head>
+      href="https://fonts.googleapis.com/css?family=Baskervville:400i|Montserrat|Open+Sans+Condensed:300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/adt6mug.css" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<body>
+  <body>
     <header></header>
 
     <section id="splash_video">
-        <video autoplay id="video" preload="auto" loop="loop" muted="muted">
-            <source src="video/video_krista.mp4">
-        </video>
+      <video autoplay id="video" preload="auto" loop="loop" muted="muted">
+        <source src="video/video_krista.mp4" />
+      </video>
     </section>
 
     <!--Show a list of some collections - container-->
     <main id="artwork">
-        <h1>featured artwork</h1>
-        <section id="collectionlist">
-        </section>
-        <div class="seemorebtn">
-            <a href="collections.html">View All Collections</a>
-            <span class="long-arrow-white">&#10230;</span>
-        </div>
+      <h1>featured artwork</h1>
+      <section id="collectionlist"></section>
+      <div class="seemorebtn">
+        <a href="collections.html">View All Collections</a>
+        <span class="long-arrow-white">&#10230;</span>
+      </div>
     </main>
 
     <!-- A template for one collection on the list - a child element -->
     <template class="collection_template">
-        <section class="home_sectionwrapper">
-            <h2 class="col_title"></h2>
-            <p class="col_describe"></p>
-            <img class="col_pic" src="" alt="Krista Werdelins collecions">
-        </section>
+      <section class="home_sectionwrapper">
+        <h2 class="col_title"></h2>
+        <p class="col_describe"></p>
+        <img class="col_pic" src="" alt="Krista Werdelins collecions" />
+      </section>
     </template>
 
     <!--A Break on page with a fixed picture in the background-->
-    <section id="homepic" class="position_fixed">
-    </section>
+    <section id="homepic" class="position_fixed"></section>
 
     <!--Show a list of upcoming exhibitions - container-->
     <main id="upcoming">
-        <h1 class="title">upcoming exhibitions</h1>
-        <section id="list">
-        </section>
-        <div class="seemorebtn">
-            <a href="exhibitions.html">View All Exhibitions</a>
-            <span class="long-arrow-white">&#10230;</span>
-        </div>
+      <h1 class="title">upcoming exhibitions</h1>
+      <section id="list"></section>
+      <div class="seemorebtn">
+        <a href="exhibitions.html">View All Exhibitions</a>
+        <span class="long-arrow-white">&#10230;</span>
+      </div>
     </main>
 
     <!-- A template for one exhibition on the list - a child element -->
     <template class="upcoming_template">
-        <section id="exhibitions">
-            <h2 class="navn"></h2>
-            <h3 class="date"></h3>
-            <p class="tekst_exh"></p>
-        </section>
+      <section id="exhibitions">
+        <h2 class="navn"></h2>
+        <h3 class="date"></h3>
+        <p class="tekst_exh"></p>
+      </section>
     </template>
 
-    <hr>
+    <hr />
     <footer></footer>
 
     <!--Get Footer og Header from script.js-->
@@ -75,74 +76,76 @@
 
     <!--Get WPs indhold-->
     <script>
-        //  data from wordpress
-        const urlCollections =
-            "http://uwei.eu/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/collections?per_page=4";
-        const urlUpcoming =
-            "https://uwei.eu/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/event?events_type=25&per_page=3&orderby=id&order=asc";
+      //  data from wordpress
+      const urlCollections =
+        "https://uwei.eu/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/collections?per_page=4";
+      const urlUpcoming =
+        "https://uwei.eu/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/event?events_type=25&per_page=3&orderby=id&order=asc";
 
-        let events = [];
-        let collections = [];
+      let events = [];
+      let collections = [];
 
-        let loadIterator = 0;
-        const homeArray = [{
-            theUrl: urlCollections,
-            theFunction: showCollections,
-            contentType: "json"
-        }, {
-            theUrl: urlUpcoming,
-            theFunction: showUpcoming,
-            contentType: "json",
-        }];
+      let loadIterator = 0;
+      const homeArray = [
+        {
+          theUrl: urlCollections,
+          theFunction: showCollections,
+          contentType: "json",
+        },
+        {
+          theUrl: urlUpcoming,
+          theFunction: showUpcoming,
+          contentType: "json",
+        },
+      ];
 
-        window.addEventListener("DOMContentLoaded", sidenVises);
+      window.addEventListener("DOMContentLoaded", sidenVises);
 
-
-        function sidenVises() {
-            console.log("sidenVises");
-            loadTheContentArray(homeArray[loadIterator]);
-        }
-        async function loadTheContentArray(contentToLoad) {
-            let jsonData = await fetch(contentToLoad.theUrl);
-            let content;
-            if (contentToLoad.contentType == "json") {
-                content = await jsonData.json();
-            }
-
-            contentToLoad.theFunction(content);
-            loadIterator++;
-
-            if (loadIterator < homeArray.length) {
-                loadTheContentArray(homeArray[loadIterator]);
-            }
+      function sidenVises() {
+        console.log("sidenVises");
+        loadTheContentArray(homeArray[loadIterator]);
+      }
+      async function loadTheContentArray(contentToLoad) {
+        let jsonData = await fetch(contentToLoad.theUrl);
+        let content;
+        if (contentToLoad.contentType == "json") {
+          content = await jsonData.json();
         }
 
-        function showCollections(content) {
-            const pattern = document.querySelector(".collection_template");
-            const collist = document.querySelector("#collectionlist");
+        contentToLoad.theFunction(content);
+        loadIterator++;
 
-            content.forEach(collection => {
-                const clone = pattern.cloneNode(true).content;
-                clone.querySelector(".col_title").textContent = collection.shortname;
-                clone.querySelector(".col_describe").textContent = collection.description;
-                clone.querySelector(".col_pic").src = collection.rep_photo.guid;
-                collist.appendChild(clone);
-            })
+        if (loadIterator < homeArray.length) {
+          loadTheContentArray(homeArray[loadIterator]);
         }
+      }
 
-        function showUpcoming(content) {
-            const pattern = document.querySelector(".upcoming_template");
-            const list = document.querySelector("#list");
+      function showCollections(content) {
+        const pattern = document.querySelector(".collection_template");
+        const collist = document.querySelector("#collectionlist");
 
-            content.forEach(event => {
-                const clone = pattern.cloneNode(true).content;
-                clone.querySelector(".navn").textContent = event.title.rendered;
-                clone.querySelector(".date").textContent = event.starting_date;
-                clone.querySelector(".tekst_exh").textContent = event.information;
-                list.appendChild(clone);
-            })
-        }
+        content.forEach((collection) => {
+          const clone = pattern.cloneNode(true).content;
+          clone.querySelector(".col_title").textContent = collection.shortname;
+          clone.querySelector(".col_describe").textContent =
+            collection.description;
+          clone.querySelector(".col_pic").src = collection.rep_photo.guid;
+          collist.appendChild(clone);
+        });
+      }
+
+      function showUpcoming(content) {
+        const pattern = document.querySelector(".upcoming_template");
+        const list = document.querySelector("#list");
+
+        content.forEach((event) => {
+          const clone = pattern.cloneNode(true).content;
+          clone.querySelector(".navn").textContent = event.title.rendered;
+          clone.querySelector(".date").textContent = event.starting_date;
+          clone.querySelector(".tekst_exh").textContent = event.information;
+          list.appendChild(clone);
+        });
+      }
     </script>
-</body>
-
+  </body>
 </html>
