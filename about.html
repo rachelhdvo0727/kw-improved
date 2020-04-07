@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krista Werdelin - About</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Baskervville:400i|Montserrat|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/adt6mug.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+<body>
+    <header></header>
+
+    <!--Breadcrumbs-->
+    <div class="breadcrumbs">
+        <ul>
+            <li><a href="index.html">home </a></li>
+            <li><a href="about.html">about</a></li>
+        </ul>
+    </div>
+
+    <section id="about">
+        <h1>about</h1>
+        <div class="sectionwrapper">
+            <div class="col">
+                <h2>Krista<br>Werdelin</h2>
+                <div class="container_video">
+                    <video src="video/krista_werdelin.mp4" controls></video>
+                </div>
+            </div>
+            <div class="col about">
+                <p></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Gallery Grid -->
+    <div class="portrait_container">
+        <div class="column">
+            <div class="content">
+                <img src="img/krista_1.jpg" alt="krista_werdelin" style="width:100%">
+            </div>
+        </div>
+        <div class="column">
+            <div class="content">
+                <img src="img/krista_2.2.jpg" alt="krista_werdelin" style="width:100%">
+            </div>
+        </div>
+        <div class="column citat">
+            <div class="citat">
+                <p>'Beauty for the sake of beauty' - Krista Werdelin</p>
+            </div>
+        </div>
+        <div class="column">
+            <div class="content">
+                <img src="img/krista_3.jpg" alt="krista_werdelin" style="width:100%">
+            </div>
+        </div>
+    </div>
+    <!-- END GRID -->
+
+    <hr>
+    <footer></footer>
+
+    <!--Get Footer og Header from script.js-->
+    <script src="script.js"></script>
+
+    <!--Get WP's contet-->
+    <script>
+        const aboutUrl = "https://uwei.eu/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/pages/7";
+
+        window.addEventListener("DOMContentLoaded", sidenVises);
+
+        function sidenVises() {
+            getAbout();
+        }
+
+        async function getAbout() {
+            const about = await fetch(aboutUrl);
+            parsedResult = await about.json();
+            document.querySelector(".about").innerHTML = parsedResult.content.rendered;
+        }
+
+    </script>
+</body>
+
+</html>

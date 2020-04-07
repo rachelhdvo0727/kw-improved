@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krista Werdelin - Exhibitions</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Baskervville:400i|Montserrat|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.typekit.net/adt6mug.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+
+
+<body>
+    <header></header>
+
+    <!--Breadcrumbs-->
+    <div class="breadcrumbs">
+        <ul>
+            <li><a href="index.html">home </a></li>
+            <li><a href="exhibitions.html">exhibitions</a></li>
+        </ul>
+    </div>
+
+
+    <main id="exhi_contentwp">
+        <h1 class="title_exhibi">Exhibitions</h1>
+
+        <h1 class="title_future">Upcoming exhibitions</h1>
+        <hr class="topbar">
+        <section class="futurelist"></section>
+
+        <h1 class="title_past">Past exhibitions</h1>
+        <hr class="topbar">
+        <section class="pastlist"></section>
+    </main>
+
+    <template id="exhibitions">
+        <section class="anexhibition">
+            <div class="flexwrapper">
+                <div class="flexcontent">
+                    <h2></h2>
+                    <img class="poster" src="" alt="ex_poster">
+                </div>
+                <div class="flexcontent exinfo">
+                    <h3 class="exhibi_start"></h3>
+                    <h3 class="exhibi_finish"></h3>
+                    <pre class="location"></pre>
+                    <p class="about_event"></p>
+                    <div class="seemorebtn">
+                        <a href="#">View Exhibition's website</a>
+                        <span class="long-arrow-white">&#10230;</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <hr>
+
+    <footer></footer>
+    <!--Get Footer og Header from script.js-->
+    <script src="script.js"></script>
+
+    <!--Get data from WP for this page-->
+    <script>
+        //  data from wordpress
+        const urlFuture = "https://uwei.eu/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/event?events_type=25&orderby=id&order=asc";
+        const urlPast = "https://uwei.eu/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/event?events_type=26&orderby=id&order=asc";
+
+        let loadIterator = 0;
+        const loadArray = [{
+            theUrl: urlFuture,
+            theFunction: showFuture,
+            contentType: "json"
+        }, {
+            theUrl: urlPast,
+            theFunction: showPast,
+            contentType: "json",
+        }];
+
+        document.addEventListener("DOMContentLoaded", sidenVises);
+
+        function sidenVises() {
+            console.log("sidenVises");
+            loadTheContentArray(loadArray[loadIterator]);
+        }
+        async function loadTheContentArray(contentToLoad) {
+            let jsonData = await fetch(contentToLoad.theUrl);
+            let content;
+            if (contentToLoad.contentType == "json") {
+                content = await jsonData.json();
+            }
+
+            contentToLoad.theFunction(content);
+            loadIterator++;
+
+            if (loadIterator < loadArray.length) {
+                loadTheContentArray(loadArray[loadIterator]);
+            }
+        }
+
+        function showFuture(content) {
+            const pattern = document.querySelector("template");
+            const listFuture = document.querySelector(".futurelist");
+
+            content.forEach(event => {
+                const clone = pattern.cloneNode(true).content;
+                clone.querySelector("h2").textContent = event.events_name;
+                clone.querySelector(".poster").src = event.poster.guid;
+                clone.querySelector(".exhibi_start").textContent = "From: " + event.starting_date + " " + event.starting_time;
+                clone.querySelector(".exhibi_finish").textContent = "To: " + event.finishing_date + " " + event.finishing_time;
+                clone.querySelector(".location").textContent = "Location: " + event.location;
+                clone.querySelector(".about_event").textContent = event.information;
+                listFuture.appendChild(clone);
+            })
+        }
+
+        function showPast(content) {
+            const pattern = document.querySelector("template");
+            const listPast = document.querySelector(".pastlist");
+
+            content.forEach(event => {
+                const clone = pattern.cloneNode(true).content;
+                clone.querySelector("h2").textContent = event.events_name;
+                clone.querySelector(".poster").src = event.poster.guid;
+                clone.querySelector(".exhibi_start").textContent = "From: " + event.starting_date + " " + event.starting_time;
+                clone.querySelector(".exhibi_finish").textContent = "To: " + event.finishing_date + " " + event.finishing_time;
+                clone.querySelector(".location").textContent = "Location: " + event.location;
+                clone.querySelector(".about_event").textContent = event.information;
+                listPast.appendChild(clone);
+            })
+        }
+    </script>
+</body></html>
