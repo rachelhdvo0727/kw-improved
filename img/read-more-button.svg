@@ -1,0 +1,8 @@
+<svg id="read_more_button" data-name="read more button" xmlns="http://www.w3.org/2000/svg" width="114" height="41" viewBox="0 0 114 41">
+  <g id="Group_3" data-name="Group 3" transform="translate(0 0.396)">
+    <rect id="Rectangle_1488" data-name="Rectangle 1488" width="114" height="36" transform="translate(0 -0.396)" fill="#b4a9a9"/>
+    <text id="See_more_" data-name="See more
+" transform="translate(16 21.604)" fill="#fcfafa" font-size="13" font-family="Montserrat-Regular, Montserrat"><tspan x="0" y="0">See more</tspan><tspan x="0" y="16"></tspan></text>
+  </g>
+  <path id="right-long-arrow" d="M15.684,43.3l-.962.873,4.285,3.875H0v1.234H19.007L14.722,53.16l.962.87,5.928-5.365Z" transform="translate(82.786 -31.015)" fill="#fcfcfc"/>
+</svg>
