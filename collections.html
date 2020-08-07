@@ -1,50 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Krista Werdelin - Collections</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Baskervville:400i|Montserrat|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.typekit.net/adt6mug.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Baskervville:400i|Montserrat|Open+Sans+Condensed:300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/adt6mug.css" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<body>
+  <body>
     <header></header>
 
     <!--Breadcrumbs-->
     <div class="breadcrumbs">
-        <ul>
-            <li><a href="index.html">home </a></li>
-            <li><a href="collections.html">collections</a></li>
-        </ul>
+      <ul>
+        <li><a href="index.html">home </a></li>
+        <li><a href="collections.html">collections</a></li>
+      </ul>
     </div>
 
     <main id="contentwp">
-        <h1>Collections</h1>
-        <section class="contentlist">
-        </section>
+      <h1>Collections</h1>
+      <section class="contentlist"></section>
     </main>
 
     <template>
-        <section class="acollection">
-            <div class="collection_name">
-                <h2></h2>
-                <p class="describe"></p>
-                <div class="seemorebtn">
-                    <p>View Collection</p>
-                    <span class="long-arrow-white">&#10230;</span>
-                </div>
-            </div>
-            <div class="collection_content">
-                <img class="motiongraphic" src="" alt="onecollections_gif">
-            </div>
-        </section>
+      <section class="acollection">
+        <div class="collection_name">
+          <h2></h2>
+          <p class="describe"></p>
+          <div class="seemorebtn">
+            <p>View Collection</p>
+            <span class="long-arrow-white">&#10230;</span>
+          </div>
+        </div>
+        <div class="collection_content">
+          <img class="motiongraphic" src="" alt="onecollections_gif" />
+        </div>
+      </section>
     </template>
 
-    <hr>
+    <hr />
 
     <footer></footer>
 
@@ -53,38 +59,41 @@
 
     <!--Get contents from WP-->
     <script>
-        // data from WP, all collections
-        const urlCollections = "http://uwei.eu/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/collections?orderby=name";
+      // data from WP, all collections
+      const urlCollections =
+        "http://ulrikkeweidemann.dk/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/collections?orderby=name";
 
-        let collections = [];
+      let collections = [];
 
-        document.addEventListener("DOMContentLoaded", start);
+      document.addEventListener("DOMContentLoaded", start);
 
-        function start() {
-            getAllCols();
-        }
+      function start() {
+        getAllCols();
+      }
 
-        async function getAllCols() {
-            const response = await fetch(urlCollections);
-            collections = await response.json();
-            showCollections();
-        }
+      async function getAllCols() {
+        const response = await fetch(urlCollections);
+        collections = await response.json();
+        showCollections();
+      }
 
-        function showCollections() {
-            const pattern = document.querySelector("template");
-            const list = document.querySelector(".contentlist");
+      function showCollections() {
+        const pattern = document.querySelector("template");
+        const list = document.querySelector(".contentlist");
 
-            collections.forEach(collection => {
-                const clone = pattern.cloneNode(true).content;
-                clone.querySelector("h2").textContent = collection.name;
-                clone.querySelector(".motiongraphic").src = collection.motion_graphic.guid;
-                clone.querySelector(".describe").textContent = collection.description;
+        collections.forEach((collection) => {
+          const clone = pattern.cloneNode(true).content;
+          clone.querySelector("h2").textContent = collection.name;
+          clone.querySelector(".motiongraphic").src =
+            collection.motion_graphic.guid;
+          clone.querySelector(".describe").textContent = collection.description;
 
-                list.appendChild(clone);
-                list.lastElementChild.addEventListener("click", () => {
-                    location.href = "singleCollection.html?id=" + collection.id;
-                });
-            })
-        }
+          list.appendChild(clone);
+          list.lastElementChild.addEventListener("click", () => {
+            location.href = "singleCollection.html?id=" + collection.id;
+          });
+        });
+      }
     </script>
-</body></html>
+  </body>
+</html>

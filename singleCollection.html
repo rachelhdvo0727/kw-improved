@@ -1,71 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title class="pagetitle"><a href="singleCollection.html?id="></a></title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Baskervville:400i|Montserrat|Open+Sans+Condensed:300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.typekit.net/adt6mug.css">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Baskervville:400i|Montserrat|Open+Sans+Condensed:300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/adt6mug.css" />
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<body>
+  <body>
     <header></header>
 
     <!--Breadcrumbs-->
     <div class="breadcrumbs">
-        <ul>
-            <li><a href="index.html">home </a></li>
-            <li><a href="collections.html">collections</a></li>
-            <li><a class="currentlink" href="singleCollection.html?id="></a></li>
-        </ul>
+      <ul>
+        <li><a href="index.html">home </a></li>
+        <li><a href="collections.html">collections</a></li>
+        <li><a class="currentlink" href="singleCollection.html?id="></a></li>
+      </ul>
     </div>
 
     <!--A template for an item on the content list-->
     <template>
-        <section class="onepainting">
-            <div class="image_container">
-                <img src="" alt="kw_onepainting">
-            </div>
-            <h2></h2>
-        </section>
+      <section class="onepainting">
+        <div class="image_container">
+          <img src="" alt="kw_onepainting" />
+        </div>
+        <h2></h2>
+      </section>
     </template>
 
     <!--Pop-up window, showing detailed information of one painting-->
     <div class="popup">
-        <button class="close">X</button>
-        <section class="popup_content">
-            <article class="apainting">
-                <div class="left">
-                    <div class="gallery_container">
-                        <div class="onepicture">
-                            <img class="picture" src="" alt="one_popup_painting">
-                        </div>
-                        <!--Next and previous buttons-->
-                        <a class="prev">&#10094;</a>
-                        <a class="next">&#10095;</a>
-                    </div>
-                </div>
-                <div class="right">
-                    <h2></h2>
-                    <p class="size"></p>
-                    <p class="status"></p>
-                    <p class="nameCol"></p>
-                </div>
-            </article>
-        </section>
+      <button class="close">X</button>
+      <section class="popup_content">
+        <article class="apainting">
+          <div class="left">
+            <div class="gallery_container">
+              <div class="onepicture">
+                <img class="picture" src="" alt="one_popup_painting" />
+              </div>
+              <!--Next and previous buttons-->
+              <a class="prev">&#10094;</a>
+              <a class="next">&#10095;</a>
+            </div>
+          </div>
+          <div class="right">
+            <h2></h2>
+            <p class="size"></p>
+            <p class="status"></p>
+            <p class="nameCol"></p>
+          </div>
+        </article>
+      </section>
     </div>
 
     <!--Placing the list of data - of one collection-->
     <main id="singlecollection">
-        <h1 class="title"></h1>
-        <section class="onecol_list">
-        </section>
+      <h1 class="title"></h1>
+      <section class="onecol_list"></section>
     </main>
 
-    <hr>
+    <hr />
     <footer></footer>
 
     <!--Get Footer og Header from script.js-->
@@ -73,110 +79,123 @@
 
     <!--Get pages data from WordPress-->
     <script>
-        const urlCol = new URLSearchParams(window.location.search);
-        let id = urlCol.get("id");
-        let paintings = [];
-        const urlOneCollection = "https://uwei.eu/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/painting?collections=" + id + "&per_page=100";
-        let gallery_counter = 0;
+      const urlCol = new URLSearchParams(window.location.search);
+      let id = urlCol.get("id");
+      let paintings = [];
+      const urlOneCollection =
+        "https://ulrikkeweidemann.dk/kea/2_semester/eksamen/kristawerdelin/wordpress/wp-json/wp/v2/painting?collections=" +
+        id +
+        "&per_page=100";
+      let gallery_counter = 0;
 
-        document.addEventListener("DOMContentLoaded", start);
+      document.addEventListener("DOMContentLoaded", start);
 
-        function start() {
-            getJson();
-            showAllpaintings();
-        }
-        async function getJson() {
-            const response = await fetch(urlOneCollection);
-            paintings = await response.json();
-            showAllpaintings();
-        }
+      function start() {
+        getJson();
+        showAllpaintings();
+      }
+      async function getJson() {
+        const response = await fetch(urlOneCollection);
+        paintings = await response.json();
+        showAllpaintings();
+      }
 
-        function showAllpaintings() {
-            const pattern = document.querySelector("template");
-            const gridlist = document.querySelector(".onecol_list");
+      function showAllpaintings() {
+        const pattern = document.querySelector("template");
+        const gridlist = document.querySelector(".onecol_list");
 
-            paintings.forEach(painting => {
-                const clone = pattern.cloneNode(true).content;
-                clone.querySelector("img").src = painting.picture.guid;
-                clone.querySelector("h2").textContent = painting.title.rendered;
+        paintings.forEach((painting) => {
+          const clone = pattern.cloneNode(true).content;
+          clone.querySelector("img").src = painting.picture.guid;
+          clone.querySelector("h2").textContent = painting.title.rendered;
 
-                //Set a variable that saves/equals to the gallery_counter
-                let gallery_num = gallery_counter;
-                gridlist.appendChild(clone);
-                gridlist.lastElementChild.addEventListener("click", () => {
-                    //show one painting in the array (gallery_counter), which is clicked on
-                    showOnepainting(painting, gallery_num)
-                });
-                //the counter should start when one painting is clicked
-                gallery_counter++;
-            })
+          //Set a variable that saves/equals to the gallery_counter
+          let gallery_num = gallery_counter;
+          gridlist.appendChild(clone);
+          gridlist.lastElementChild.addEventListener("click", () => {
+            //show one painting in the array (gallery_counter), which is clicked on
+            showOnepainting(painting, gallery_num);
+          });
+          //the counter should start when one painting is clicked
+          gallery_counter++;
+        });
 
-            //get the first objects' value, which is name of the collection in beadcrumbs
-            console.log(paintings[0].collection);
-            document.querySelector(".title").textContent = paintings[0].collection;
-            document.querySelector(".currentlink").textContent = paintings[0].collection;
+        //get the first objects' value, which is name of the collection in beadcrumbs
+        console.log(paintings[0].collection);
+        document.querySelector(".title").textContent = paintings[0].collection;
+        document.querySelector(".currentlink").textContent =
+          paintings[0].collection;
 
-            //get the first objects' value, which is name of the collection in page's title <title>
-            document.querySelector(".pagetitle").textContent = "Krista Werdelin - " + paintings[0].collection;
+        //get the first objects' value, which is name of the collection in page's title <title>
+        document.querySelector(".pagetitle").textContent =
+          "Krista Werdelin - " + paintings[0].collection;
+      }
 
-        }
+      function showOnepainting(painting, counter) {
+        console.log("showOnepainting" + counter);
+        gallery_counter = counter;
+        document.querySelector(".popup").style.display = "block";
+        document.querySelector(".close").addEventListener("click", closePopup);
 
-        function showOnepainting(painting, counter) {
-            console.log("showOnepainting" + counter);
-            gallery_counter = counter;
-            document.querySelector(".popup").style.display = "block";
-            document.querySelector(".close").addEventListener("click", closePopup);
+        document.querySelector(".apainting img").src = painting.picture.guid;
+        document.querySelector(".apainting h2").textContent =
+          painting.title.rendered;
+        document.querySelector(".size").textContent = "Size: " + painting.size;
+        document.querySelector(".status").textContent =
+          "Sold: " + painting.sold;
+        document.querySelector(".nameCol").textContent =
+          "Collection: " + painting.collection;
 
-            document.querySelector(".apainting img").src = painting.picture.guid;
-            document.querySelector(".apainting h2").textContent = painting.title.rendered;
-            document.querySelector(".size").textContent = "Size: " + painting.size;
-            document.querySelector(".status").textContent = "Sold: " + painting.sold;
-            document.querySelector(".nameCol").textContent = "Collection: " + painting.collection;
+        //controls for galleriet in pop-up window
+        document.querySelector(".prev").addEventListener("click", clickPrev);
+        document.querySelector(".next").addEventListener("click", clickNext);
+      }
 
-            //controls for galleriet in pop-up window
-            document.querySelector(".prev").addEventListener("click", clickPrev);
-            document.querySelector(".next").addEventListener("click", clickNext);
-        }
+      function closePopup() {
+        document.querySelector(".popup").style.display = "none";
+      }
 
-        function closePopup() {
-            document.querySelector(".popup").style.display = "none";
-        }
+      function clickNext() {
+        console.log("clickNext" + gallery_counter);
+        //click Next button and the gallery counts one more image in the list
+        gallery_counter++;
 
-        function clickNext() {
-            console.log("clickNext" + gallery_counter);
-            //click Next button and the gallery counts one more image in the list
-            gallery_counter++;
+        //if the gallery counter gets to the whole length of the collection (the last picture), we set the counter back to -1, and the clickNext function wil count the next object which is 0
 
-            //if the gallery counter gets to the whole length of the collection (the last picture), we set the counter back to -1, and the clickNext function wil count the next object which is 0
-
-            if (gallery_counter == paintings.length) {
-                gallery_counter = 0;
-            }
-
-            //show the information that belongs to one image from one collection
-            showPaintingsinfo();
-        }
-
-        function clickPrev() {
-            console.log("clickPrev");
-            //click Prev button and the gallery counts one image backward in the list
-            gallery_counter--;
-
-            //if the gallery counter is less than 0, we come back to the last object in the array - the last place in the array is the length of the list - 1
-            if (gallery_counter < 0) {
-                gallery_counter = paintings.length - 1;
-            }
-            //show the information that belongs to one image from one collection
-            showPaintingsinfo();
+        if (gallery_counter == paintings.length) {
+          gallery_counter = 0;
         }
 
-        function showPaintingsinfo() {
-            //show the information that belongs to one image from one collection
-            document.querySelector(".apainting img").src = paintings[gallery_counter].picture.guid;
-            document.querySelector(".apainting h2").textContent = paintings[gallery_counter].title.rendered;
-            document.querySelector(".size").textContent = "Size: " + paintings[gallery_counter].size;
-            document.querySelector(".status").textContent = "Sold: " + paintings[gallery_counter].sold;
-            document.querySelector(".nameCol").textContent = "Collection: " + paintings[gallery_counter].collection;
+        //show the information that belongs to one image from one collection
+        showPaintingsinfo();
+      }
+
+      function clickPrev() {
+        console.log("clickPrev");
+        //click Prev button and the gallery counts one image backward in the list
+        gallery_counter--;
+
+        //if the gallery counter is less than 0, we come back to the last object in the array - the last place in the array is the length of the list - 1
+        if (gallery_counter < 0) {
+          gallery_counter = paintings.length - 1;
         }
+        //show the information that belongs to one image from one collection
+        showPaintingsinfo();
+      }
+
+      function showPaintingsinfo() {
+        //show the information that belongs to one image from one collection
+        document.querySelector(".apainting img").src =
+          paintings[gallery_counter].picture.guid;
+        document.querySelector(".apainting h2").textContent =
+          paintings[gallery_counter].title.rendered;
+        document.querySelector(".size").textContent =
+          "Size: " + paintings[gallery_counter].size;
+        document.querySelector(".status").textContent =
+          "Sold: " + paintings[gallery_counter].sold;
+        document.querySelector(".nameCol").textContent =
+          "Collection: " + paintings[gallery_counter].collection;
+      }
     </script>
-</body></html>
+  </body>
+</html>
